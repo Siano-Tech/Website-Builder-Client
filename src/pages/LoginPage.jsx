@@ -28,7 +28,7 @@ export default function LoginPage() {
         }
         toast.loading('Getting started...');
         submitForm({phoneNo: phoneNo}).then((d) => {
-            console.log('user registered successfully : ', d);
+            // console.log('user registered successfully : ', d);
             localStorage.setItem('user', JSON.stringify(d.data.user));
             // localStorage.setItem('token', d.data.token);
             localStorage.setItem('isLoggedIn', true);

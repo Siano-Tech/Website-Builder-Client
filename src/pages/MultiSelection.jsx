@@ -42,8 +42,8 @@ export const MultiSelection = ({data, selectedData = [], onSelected}) => {
                     onClick={() => selectItem(e)}
                 >
                     <span className="flex items-center">
-                        {selectedData.find(f => e.id === f.id)?.id ? <CheckCircleIcon className="w-8 h-8 mr-5 text-indigo-500 shrink-0" /> : <PlusCircleIcon className="w-8 h-8 mr-5 shrink-0" />}
-                        <span>{e.name}</span>
+                        {selectedData.find(f => e.id === f.id)?.id ? <CheckCircleIcon className="w-8 h-8 mr-5 text-indigo-500 shrink-0" /> : <PlusCircleIcon className="w-8 h-8 mr-5 shrink-0 text-gray-500" />}
+                        <span className={classNames(selectedData.find(f => e.id === f.id)?.id ? "text-indigo-500" : "text-gray-500")}>{e.name}</span>
                     </span>
                 </button>
             )}
