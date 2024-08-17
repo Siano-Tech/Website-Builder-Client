@@ -228,9 +228,16 @@ export const FormPage = () => {
             console.log('Clinic data submitted successfully : ', d);
             toast.remove();
             toast.success('Clinic Data Submitted');
-            window.open('https://digi-clinik-doctor-template.vercel.app/?id='+clinicData.uid, '_blank');
-            // window.open('website/?id='+clinicData.uid, '_blank');
+            openUrl()
         });
+    }
+
+    const openUrl = () => {
+        if(window.location.hostname.includes('localhost')) {
+            window.open('http://127.0.0.1:5501/website/?id='+uid, 'self');
+        } else {
+            window.open('https://digi-clinik-doctor-template.vercel.app/?id='+uid, 'self');
+        }
     }
 
 
@@ -308,7 +315,8 @@ export const FormPage = () => {
                                         <input
                                             id="phoneNo"
                                             name="phoneNo"
-                                            type="text"
+                                            type="tel"
+                                            maxLength={10}
                                             className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             required
                                             defaultValue={clinicData?.phoneNo ?? user?.phoneNo}
