@@ -1,8 +1,10 @@
 export const QualificationData = () => {
     return [
         {  id: 1, name: 'MBBS', disabled: false },
-        {  id: 2, name: 'MD', disabled: false },
-        {  id: 3, name: 'DM', disabled: false },
+        {  id: 2, name: 'MD - Dermatology', disabled: false },
+        {  id: 3, name: 'MD - Dermatology, Venereology & Leprosy', disabled: false },
+        {  id: 4, name: 'Diploma - Dermatology, Venereology & Leprosy', disabled: false },
+        {  id: 5, name: 'DNB - Dermatology, Venereology & Leprosy', disabled: false }
     ]
 }
 
@@ -12,6 +14,26 @@ export const SpecialityData = () => {
         {  id: 'dental', name: 'Dentist', disabled: true },
         {  id: 'physio', name: 'Physiotherapist', disabled: true },
     ]
+}
+
+export const SpecialisationData = () => {
+    return {  
+        derma: {
+            id: 'derma', 
+            disabled: false,
+            data: [
+                {  id: 1, name: 'Dermatologist', disabled: false },
+                {  id: 2, name: 'Dermatosurgeon', disabled: false },
+                {  id: 3, name: 'Cosmetologist', disabled: false },
+                {  id: 4, name: 'Hair Transplant Surgeon', disabled: false },
+                {  id: 5, name: 'Pediatric Dermatologist', disabled: false },
+                {  id: 6, name: 'Aesthetic Dermatologist', disabled: false },
+                {  id: 7, name: 'Trichologist', disabled: false },
+                {  id: 8, name: 'Venereologist', disabled: false },
+                {  id: 9, name: 'Immunodermatologist', disabled: false },
+            ]
+        }
+    }
 }
 
 export const DiagnosisData = () => {

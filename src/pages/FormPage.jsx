@@ -4,7 +4,7 @@ import { getBanners, getClinicData, submitForm } from '../api/formBuilder';
 import toast from 'react-hot-toast';
 import { UploadFile } from '../utils/UploadFile';
 import { getUser, getUserId } from '../utils/Utils';
-import { DiagnosisData, ProceduresData, QualificationData, SpecialityData } from '../utils/Data';
+import { DiagnosisData, ProceduresData, QualificationData, SpecialisationData, SpecialityData } from '../utils/Data';
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { ComboBox } from './ComboBox';
 import { MultiSelection } from './MultiSelection';
@@ -20,6 +20,8 @@ export const FormPage = () => {
     const [downloadURL, setDownloadURL] = useState({});
     const [clinicData, setClinicData] = useState();
     const [selectedDiagnosis, setSelectedDiagnosis] = useState([]);
+    const [selectedQualification, setSelectedQualification] = useState([]);
+    const [selectedSpecialisation, setSelectedSpecialisation] = useState([]);
     const [selectedProcedures, setSelectedProcedures] = useState([]);
     const [doctorPic, setDoctorPic] = useState();
     const [qualification, setQualification] = useState('MBBS');
@@ -56,6 +58,7 @@ export const FormPage = () => {
                     setSelectedProcedures(clinicData.procedures);
                     if(clinicData.qualificationDets) {
                         setQualificationDets(clinicData.qualificationDets);
+                        setSelectedQualification(clinicData.qualificationDets)
                     }
                     if(clinicData.workExperience) {
                         setWorkExperience(clinicData.workExperience);
@@ -74,10 +77,17 @@ export const FormPage = () => {
     const handleMultiSelection = (key, e) => {
         if (key === 'diagnosis') {
             setSelectedDiagnosis([...e]);
-        } else {
+        } else if(key === 'procedures') {
             setSelectedProcedures([...e]);
+        } else if(key === 'qualification') {
+            setSelectedQualification([...e]);
+            setQualification(e.map(e => e.name).join(', '))
+        } else {
+            setSelectedSpecialisation([...e]);
         }
     }
+
+    console.log({qualification, selectedSpecialisation});
 
     const onChangeQualification = (val) => {
         setQualification(val);
@@ -214,6 +224,7 @@ export const FormPage = () => {
                 clinicData[entry[0]] = entry[1];
             }
         }
+        clinicData.speciality = selectedSpecialisation.map((e) => e.name).join(', ')
         clinicData.doctorPic = doctorPic;
         clinicData.clinicGallery = Object.values(downloadURL);
         clinicData.banners = selectedBanners;
@@ -221,7 +232,7 @@ export const FormPage = () => {
         clinicData.diagnosis = selectedDiagnosis;
         clinicData.procedures = selectedProcedures;
         clinicData.workExperience = workExperience;
-        clinicData.qualificationDets = qualificationDets;
+        clinicData.qualificationDets = selectedQualification;
         clinicData.clinicAddr = clinicAddr;
         // console.log(clinicData);
         submitForm(clinicData).then((d) => {
@@ -292,26 +303,10 @@ export const FormPage = () => {
                                     </div>
                                 </div>
                                 <div className="sm:col-span-2 mb-8">
-                                    <label htmlFor="speciality" className="block text-sm font-medium leading-6 text-gray-900">
-                                        Speciality
-                                    </label>
-                                    <div className="mt-2">
-                                        <select
-                                            id="speciality"
-                                            name="speciality"
-                                            className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                                            required
-                                            defaultValue={clinicData?.speciality}
-                                        >
-                                            {SpecialityData().map((e) => !e.disabled &&  <option key={e.id}>{e.name}</option>)}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="sm:col-span-2 mb-8">
                                     <label htmlFor="qualification" className="block text-sm font-medium leading-6 text-gray-900">
                                         Qualification
                                     </label>
-                                    <div className="mt-2">
+                                    {/* <div className="mt-2">
                                         <select
                                             id="qualification"
                                             name="qualification"
@@ -322,6 +317,30 @@ export const FormPage = () => {
                                         >
                                             {QualificationData().map((e) => !e.disabled && <option key={e.id}>{e.name}</option>)}
                                         </select>
+                                    </div> */}
+                                    <div className="mt-2">
+                                        {/* <ComboBox data={DiagnosisData().derma.data} displayKey={'name'} onSelected={setSelectedDiagnosis} placeholder={'Please select diagnosis'} /> */}
+                                        <MultiSelection data={QualificationData().filter((e) => !e.disabled)} selectedData={selectedQualification} onSelected={(e) => handleMultiSelection('qualification', e)}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-2 mb-8">
+                                    <label htmlFor="speciality" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Specialisation
+                                    </label>
+                                    {/* <div className="mt-2">
+                                        <select
+                                            id="speciality"
+                                            name="speciality"
+                                            className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                                            required
+                                            defaultValue={clinicData?.speciality}
+                                        >
+                                            {SpecialityData().map((e) => !e.disabled &&  <option key={e.id}>{e.name}</option>)}
+                                        </select>
+                                    </div> */}
+                                    <div className="mt-2">
+                                        {/* <ComboBox data={DiagnosisData().derma.data} displayKey={'name'} onSelected={setSelectedDiagnosis} placeholder={'Please select diagnosis'} /> */}
+                                        <MultiSelection data={SpecialisationData().derma.data.filter((e) => !e.disabled)} selectedData={selectedSpecialisation} onSelected={(e) => handleMultiSelection('specialisation', e)}/>
                                     </div>
                                 </div>
                                 <div className="sm:col-span-2 mb-8">
@@ -426,7 +445,7 @@ export const FormPage = () => {
                     <div className="border-b border-gray-900/10 pb-12">
                         <h2 className="text-xl font-semibold leading-7 text-gray-900">Education Details</h2>
                         {/* <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p> */}
-                        {qualificationDets.map((e) => <div key={e.id} className="mt-5 sm:mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        {selectedQualification.map((e) => <div key={e.id} className="mt-5 sm:mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div className="sm:col-span-2 hidden">
                                 <label htmlFor="qualification" className="block text-sm font-medium leading-6 text-gray-900">
                                     Qualification
@@ -437,16 +456,16 @@ export const FormPage = () => {
                                         name="qualification"
                                         className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                                         required
-                                        defaultValue={e?.qualification}
-                                        onChange={(f) => e.qualification = f.target.value}
+                                        defaultValue={e?.name}
+                                        onChange={(f) => e.name = f.target.value}
                                     >
-                                        <option>{e?.qualification}</option>
+                                        <option>{e?.name}</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="sm:col-span-2">
                                 <label htmlFor="collegeName" className="block text-sm font-medium leading-6 text-gray-900">
-                                    College Name ({e?.qualification})
+                                    College Name ({e?.name})
                                 </label>
                                 <div className="mt-2">
                                     <input
@@ -462,7 +481,7 @@ export const FormPage = () => {
                             </div>
                             <div className="sm:col-span-2">
                                 <label htmlFor="yog" className="block text-sm font-medium leading-6 text-gray-900">
-                                    Year of completion ({e?.qualification})
+                                    Year of completion ({e?.name})
                                 </label>
                                 <div className="mt-2">
                                     <input
@@ -1390,12 +1409,12 @@ export const FormPage = () => {
                     <div className="border-b border-gray-900/10 pb-12">
                         <h2 className="text-xl font-semibold leading-7 text-gray-900">Clinic gallery</h2>
                         {/* <p className="mt-1 text-sm leading-6 text-gray-600">Upload some good clinic photos to be displayed when a user lands on the screen</p> */}
-                        <div className="mt-5 sm:mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div className="mt-5 sm:mt-10 grid grid-cols-2 gap-x-3 gap-y-3 sm:grid-cols-6">
                             {[0,1,2,3,4,5].map((e) => <div className="sm:col-span-1" key={e}>
                                 {/* <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
                                     Photo {e+1}
                                 </label> */}
-                                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-2">
                                     <div className="text-center">
                                         {!imageFile[e] && <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" /> }
                                         {imageFile[e] && <img width={300} src={imageFile[e]} />}
