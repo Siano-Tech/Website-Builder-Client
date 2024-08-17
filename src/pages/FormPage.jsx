@@ -234,6 +234,7 @@ export const FormPage = () => {
         clinicData.workExperience = workExperience;
         clinicData.qualificationDets = selectedQualification;
         clinicData.clinicAddr = clinicAddr;
+        clinicData.phoneNo = user?.phoneNo;
         // console.log(clinicData);
         submitForm(clinicData).then((d) => {
             // console.log('Clinic data submitted successfully : ', d);
@@ -376,7 +377,7 @@ export const FormPage = () => {
                             </div>
 
                             <div className="sm:col-span-2">
-                                <div className="sm:col-span-2 mb-8">
+                                {/* <div className="sm:col-span-2 mb-8">
                                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                         Email
                                     </label>
@@ -407,7 +408,7 @@ export const FormPage = () => {
                                         />
                                     </div>
                                     <p className='mt-2 text-xs text-muted'>(This mobile no. will not be visible for patients on your website, it will be used to send appointment related notifications from DigiClinik)</p>
-                                </div>
+                                </div> */}
                                 <div className="sm:col-span-2">
                                     <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
                                         In which city are you practicing?
