@@ -42,7 +42,7 @@ export const FormPage = () => {
                 setBanners(ban);
               } else {
                 const status = resp.data.message;
-                toast.error(status);
+                // toast.error(status);
               }
         })
 
@@ -77,7 +77,7 @@ export const FormPage = () => {
                 }
               } else {
                 const status = resp.data.message;
-                toast.error(status);
+                // toast.error(status);
               }
         })
     }, []);
