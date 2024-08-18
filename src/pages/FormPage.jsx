@@ -255,37 +255,16 @@ export const FormPage = () => {
 
     return (
         <div className='mx-auto max-w-5xl p-6 lg:px-8'>
+            {/* <h1 className="text-xl font-semibold leading-7 text-gray-900 mb-5">Begin your 30 second website setup</h1> */}
+            <h1 className="mb-5 text-center w-full items-center rounded-md bg-yellow-50 px-2 py-1 text-md font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+                Fill out the form below to create your website. You can easily make changes later in the editor if needed.
+            </h1>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-8">
                     <div className="border-b border-gray-900/10 pb-12">
                         <h2 className="text-xl font-semibold leading-7 text-gray-900">Doctor Details</h2>
                         {/* <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p> */}
                         <div className="mt-5 sm:mt-10  grid grid-cols-1 gap-x-6 gap-y-8">
-                            <div className="sm:col-span-2">
-                                <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                                    Doctor Image
-                                </label>
-                                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                                    <div className="text-center">
-                                        {!doctorPic && <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" /> }
-                                        {doctorPic && <img width={300} src={doctorPic} style={{maxWidth: '200px'}} />}
-                                        <div className="mt-4 flex justify-center text-sm leading-6 text-gray-600">
-                                            <label
-                                                htmlFor={"file-upload-doctor-pic"}
-                                                className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                                            >
-                                                <span>{doctorPic ? 'Change image' :'Upload an image'}</span>
-                                                <input id={"file-upload-doctor-pic"} name={"file-upload-doctor-pic"} type="file" className="sr-only" 
-                                                    accept="image/*"
-                                                    onChange={(e) => onFileUpload(e, 'doctorPic')}
-                                                />
-                                            </label>
-                                            {doctorPic && <p className="pl-1">or drag and drop</p>}
-                                        </div>
-                                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                                    </div>
-                                </div>
-                            </div>
                             <div className="sm:col-span-2">
                                 <div className="sm:col-span-2 mb-8">
                                     <label htmlFor="doctorName" className="block text-sm font-medium leading-6 text-gray-900">
@@ -440,6 +419,31 @@ export const FormPage = () => {
                                     />
                                 </div>
                             </div> */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
+                                    Doctor Photo
+                                </label>
+                                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-4">
+                                    <div className="text-center">
+                                        {!doctorPic && <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" /> }
+                                        {doctorPic && <img width={200} src={doctorPic} style={{maxWidth: '200px'}} />}
+                                        <div className="mt-4 flex justify-center text-sm leading-6 text-gray-600">
+                                            <label
+                                                htmlFor={"file-upload-doctor-pic"}
+                                                className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                                            >
+                                                <span>{doctorPic ? 'Change image' :'Upload an image'}</span>
+                                                <input id={"file-upload-doctor-pic"} name={"file-upload-doctor-pic"} type="file" className="sr-only" 
+                                                    accept="image/*"
+                                                    onChange={(e) => onFileUpload(e, 'doctorPic')}
+                                                />
+                                            </label>
+                                            {doctorPic && <p className="pl-1">or drag and drop</p>}
+                                        </div>
+                                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -551,7 +555,7 @@ export const FormPage = () => {
                         </div>)}
                         <button
                             onClick={addExperience}
-                            className="mt-5 sm:mt-10 w-40 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            className="sm:mt-10 w-40 cursor-pointer underline text-sm font-semibold text-indigo-500 text-left"
                         >
                             {' +  '} Add More
                         </button>
@@ -738,7 +742,7 @@ export const FormPage = () => {
                         </div>)}
                         <button
                             onClick={addClinicAddr}
-                            className="mt-10 sm:w-40 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            className="mt-8 sm:mt-10 w-40 cursor-pointer underline text-sm font-semibold text-indigo-500 text-left"
                         >
                             + Add one more clinic
                         </button>
@@ -1419,7 +1423,7 @@ export const FormPage = () => {
                                     <div className="text-center">
                                         {!imageFile[e] && <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" /> }
                                         {imageFile[e] && <img width={300} src={imageFile[e]} />}
-                                        <div className="mt-4 flex flex-col md:flex-row justify-center text-sm leading-6 text-gray-600">
+                                        <div className="mt-4 flex flex-col justify-center text-sm leading-6 text-gray-600">
                                             <label
                                                 htmlFor={"file-upload"+e}
                                                 className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
@@ -1431,9 +1435,9 @@ export const FormPage = () => {
                                                     onChange={(f) => onFileUpload(f, e)}
                                                 />
                                             </label>
-                                            {!imageFile[e] && <p className="pl-1">or drag and drop</p>}
+                                            {/* {!imageFile[e] && <p className="pl-1">or drag and drop</p>} */}
                                         </div>
-                                        <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                                        <p className="text-xs leading-5 text-gray-600">or drag and drop PNG, JPG, GIF up to 10MB</p>
                                     </div>
                                 </div>
                             </div>)}
@@ -1628,7 +1632,7 @@ export const FormPage = () => {
                         type="submit"
                         className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        {!clinicData ?  'Launch My Site' : 'Update & Launch my site'}
+                        {!clinicData ?  'Launch My Site' : 'Update & View my site'}
                     </button>
                 </div>
             </form>

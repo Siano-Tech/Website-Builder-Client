@@ -58,29 +58,35 @@ export function LandingPage() {
                                 <ul role="list" class="list-disc space-y-2 pl-6 sm:pl-4 text-sm">
                                     <li><span class="text-md"><span className="font-bold">AI-Generated Websites:</span> Answer a few questions, and our AI creates your site instantly.</span></li>
                                     <li><span class="text-md"><span className="font-bold">Easy to Edit:</span> Modify your website easily with our simple editor.</span></li>
-                                    <li><span class="text-md"><span className="font-bold">Launch in 30 Seconds:</span> Get a fully functional site online in under 30 seconds.</span></li>                            
+                                    <li><span class="text-md"><span className="font-bold">Accept Appointments:</span> Receive appointment bookings and updates directly on WhatsApp.</span></li>                            
+                                    <li><span class="text-md"><span className="font-bold">SEO Optimised:</span> Built-in SEO tools to boost your visibility and attract more patients.</span></li>                            
                                     <li><span class="text-md"><span className="font-bold">Customization Services:</span> Basic customization available after launch.</span></li>                            
                                     <li><span class="text-md"><span className="font-bold">100% Ownership:</span> Full access to the source code ensures complete ownership.</span></li>                            
                                 </ul>
                             </div>
                         </div>
-                        <div class="mt-10 text-center">
+                        <div class="mt-10 text-center sm:text-left">
                             {/* <h2 class="text-2xl font-medium text-gray-900">Price: Rs. 9999 - Rs. 4999</h2> */}
-                            <p
+                            <span className="inline-flex items-center rounded-md bg-green-50 px-4 py-1 text-xl text-green-700 ring-1 ring-inset ring-green-600/20">
+                                Price: Rs. <span className="line-through">10,999</span> - Rs. 4999
+                            </span>
+                            {/* <p
                                 className="text-center inline-block rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-center text-white hover:bg-indigo-700"
                             >
                                 Price: Rs. <span className="line-through">10,999</span> - Rs. 4999
-                            </p>
+                            </p> */}
                             {/* <div class="mt-4 space-y-6">
                                 <p class="text-sm text-gray-600">Price: Rs. 9999 - Rs. 4999</p>
                             </div> */}
                         </div>
-                        <Link
-                            to={'/login'}
-                            className="mt-10 inline-block rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-center font-medium text-white hover:bg-indigo-700"
-                        >
-                            Enter your phone number to get started 
-                        </Link>
+                        <div className="text-center sm:text-left">
+                            <Link
+                                to={'/login'}
+                                className="mt-10 inline-block rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-center font-medium text-white hover:bg-indigo-700"
+                            >
+                                Get Started 
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <div className="order-first sm:order-last">
