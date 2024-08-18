@@ -23,6 +23,7 @@ export const FormPage = () => {
     const [selectedQualification, setSelectedQualification] = useState([]);
     const [selectedSpecialisation, setSelectedSpecialisation] = useState([]);
     const [selectedProcedures, setSelectedProcedures] = useState([]);
+    const [doctorName, setDoctorName] = useState('Dr. ');
     const [doctorPic, setDoctorPic] = useState();
     const [qualification, setQualification] = useState('MBBS');
     const qualificationDetsTemplate = {id: 0, qualification: 'MBBS', collegeName: '', yog: ''};
@@ -51,11 +52,18 @@ export const FormPage = () => {
                 // console.log(clinicData);
                 if(clinicData) {
                     setClinicData(clinicData);
+                    setDoctorName(clinicData?.doctorName);
                     setDoctorPic(clinicData.doctorPic);
-                    setImageFile({...Object.values(clinicData?.clinicGallery)});
-                    setDownloadURL({...Object.values(clinicData?.clinicGallery)});
-                    setSelectedDiagnosis(clinicData.diagnosis);
-                    setSelectedProcedures(clinicData.procedures);
+                    if(clinicData?.clinicGallery) {
+                        setImageFile({...Object.values(clinicData?.clinicGallery)});
+                        setDownloadURL({...Object.values(clinicData?.clinicGallery)});
+                    }
+                    if(clinicData?.diagnosis) {
+                        setSelectedDiagnosis(clinicData.diagnosis);
+                    }
+                    if(clinicData?.procedures) {
+                        setSelectedProcedures(clinicData.procedures);
+                    }
                     if(clinicData.qualificationDets) {
                         setQualificationDets(clinicData.qualificationDets);
                         setSelectedQualification(clinicData.qualificationDets)
@@ -276,8 +284,9 @@ export const FormPage = () => {
                                             name="doctorName"
                                             type="text"
                                             autoComplete="given-name"
-                                            required
-                                            defaultValue={clinicData?.doctorName ?? 'Dr. '}
+                                            defaultValue={clinicData?.doctorName}
+                                            value={doctorName}
+                                            onChange={(e) => setDoctorName(e.target.value)}
                                             className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
@@ -460,7 +469,6 @@ export const FormPage = () => {
                                         id="qualification"
                                         name="qualification"
                                         className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                                        required
                                         defaultValue={e?.name}
                                         onChange={(f) => e.name = f.target.value}
                                     >
@@ -748,7 +756,7 @@ export const FormPage = () => {
                         </button>
                     </div>
 
-                    <div className="hidden border-b border-gray-900/10 pb-12">
+                    {/* <div className="hidden border-b border-gray-900/10 pb-12">
                         <h2 className="text-xl font-semibold leading-7 text-gray-900">Banner Images</h2>
                         <p className="mt-1 text-sm leading-6 text-gray-600">Select some photos to be displayed in the banner when a user lands on the screen</p>
                         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -764,7 +772,7 @@ export const FormPage = () => {
                                 </div>
                             </div>)}
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* <div className="border-b border-gray-900/10 pb-12">
                         <h2 className="text-xl font-semibold leading-7 text-gray-900">Hero Section</h2>
