@@ -20,13 +20,13 @@ export const FormPage = () => {
     const [downloadURL, setDownloadURL] = useState({});
     const [clinicData, setClinicData] = useState();
     const [selectedDiagnosis, setSelectedDiagnosis] = useState([]);
-    const [selectedQualification, setSelectedQualification] = useState([]);
+    const [selectedQualification, setSelectedQualification] = useState([{  id: 1, name: 'MBBS', disabled: false },]);
     const [selectedSpecialisation, setSelectedSpecialisation] = useState([]);
     const [selectedProcedures, setSelectedProcedures] = useState([]);
     const [doctorName, setDoctorName] = useState('Dr. ');
     const [doctorPic, setDoctorPic] = useState();
     const [qualification, setQualification] = useState('MBBS');
-    const qualificationDetsTemplate = {id: 0, qualification: 'MBBS', collegeName: '', yog: ''};
+    const qualificationDetsTemplate = {id: 0, name: 'MBBS', collegeName: '', yog: ''};
     const [qualificationDets, setQualificationDets] = useState([qualificationDetsTemplate]);
     const workExperienceTemplate = {id: 0, hospitalName: '', workYrs: ''};
     let [workExperience, setWorkExperience] = useState([workExperienceTemplate]);
@@ -232,7 +232,7 @@ export const FormPage = () => {
                 clinicData[entry[0]] = entry[1];
             }
         }
-        clinicData.speciality = selectedSpecialisation.map((e) => e.name).join(', ')
+        clinicData.speciality = selectedSpecialisation.length === 0 ? 'Dermatologist' : selectedSpecialisation.map((e) => e.name).join(', ')
         clinicData.doctorPic = doctorPic;
         clinicData.clinicGallery = Object.values(downloadURL);
         clinicData.banners = selectedBanners;
