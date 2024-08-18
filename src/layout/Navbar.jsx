@@ -19,6 +19,12 @@ const routes = [
     isHidden: isLoggedIn()
   },
   {
+    label: 'Dashboard',
+    to: '/login',
+    type: 'dashboard',
+    isHidden: !isLoggedIn()
+  },
+  {
     label: getUser() ? getUser().phoneNo : '',
     to: '',
     type: 'profile',
@@ -33,18 +39,18 @@ export default function Navbar() {
   let navigate = useNavigate();
 
   const logout = () => {
-    navigate('/');
     onLogout();
+    navigate('/');
     window.location.reload();
   }
 
-  if(location && (location.pathname === "/" || location.pathname === "/website/")) {
+  if(location && (location.pathname === "/login" || location.pathname === "/website/")) {
     return null
   }
 
   return (
     <header className="bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link to={"/"} className="-m-1.5 p-1.5 flex items-center">
             <span className="sr-only">Website Builder</span>
@@ -64,7 +70,7 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {routes.map((e) => 
-            !e.isHidden && <Link to={e.to} key={e.label} className="flex text-sm font-semibold leading-6 text-gray-900 pr-5">
+            !e.isHidden && <Link to={e.to} key={e.label} className="flex text-sm font-semibold leading-6 text-gray-900 rounded-lg px-3 py-2.5 hover:bg-gray-100">
               {e.label}
               {e?.type === 'profile' && <ArrowRightStartOnRectangleIcon className="ml-2 h-6 w-6" onClick={logout}  />}
             </Link>

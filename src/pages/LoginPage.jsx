@@ -35,6 +35,7 @@ export default function LoginPage() {
             toast.remove();
             toast.success('Starting...');
             navigate('/fb');
+            window.location.reload();
         }).catch((e) => toast.success(e.data));
     }
 

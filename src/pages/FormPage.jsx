@@ -260,7 +260,7 @@ export const FormPage = () => {
                     <div className="border-b border-gray-900/10 pb-12">
                         <h2 className="text-xl font-semibold leading-7 text-gray-900">Doctor Details</h2>
                         {/* <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p> */}
-                        <div className="mt-5 sm:mt-10  grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div className="mt-5 sm:mt-10  grid grid-cols-1 gap-x-6 gap-y-8">
                             <div className="sm:col-span-2">
                                 <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
                                     Doctor Image
